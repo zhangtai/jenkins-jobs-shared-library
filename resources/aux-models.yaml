@@ -1,5 +1,5 @@
 ---
-name: HDP Aux models
+name: Aux models
 enabled: yes
 models:
   - name: Aux_Group_Deploy
