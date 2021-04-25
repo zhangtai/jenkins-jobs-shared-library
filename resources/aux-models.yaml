@@ -1,0 +1,30 @@
+---
+name: HDP Aux models
+enabled: yes
+models:
+  - name: Aux_Group_Deploy
+    models:
+      - name: Aux_Ansible
+        attrs:
+          - name: taskId
+            displayName: Ansible Tower Task ID
+            control:
+              type: TextFieldControl
+          - name: stage
+            displayName: Stage
+            control:
+              type: ChoiceControl
+              mode: RADIO_BUTTON
+              options:
+                - value: dev
+                  display: Dev
+                - value: staging
+                  display: Staging
+                - value: prod
+                  display: Prod
+      - name: Aux_G3
+  - name: Aux_Group_Scan
+    models:
+      - name: Aux_Sonar
+      - name: Aux_IQ
+      - name: Aux_Checkmarx
