@@ -14,6 +14,29 @@ def createModel(Map modelDef, String superType = null) {
         println "Setting Super Type: ${superType}"
         auxModel.setSuperTypeId(superType)
     }
+    // Add attributes
+    def attributes = []
+    modelDef?.attrs?.each { Map attrDef ->
+        println "Creating attribute: ${attrDef}"
+        Map controlDef = attrDef.control as Map
+        def control = null
+        if (controlDef.type == "TextFieldControl") {
+            control = new TextFieldControl()
+        }
+        if (controlDef.type == "ChoiceControl") {
+            def options = controlDef.options.collect { Map option ->
+                new ChoiceControl.Option(option.display as String, option.value as String)
+            }
+            control = new ChoiceControl(
+                    options,
+                    ChoiceControl.Mode.RADIO_BUTTON
+            )
+        }
+        def attr = new Attribute(attrDef.name as String, attrDef.displayName as String, control)
+        attributes << attr
+    }
+    println "Setting attributes"
+    auxModel.setAttributes(attributes)
     println "Saving model ${auxModel}"
     auxModel.save()
     jenkins.save()
