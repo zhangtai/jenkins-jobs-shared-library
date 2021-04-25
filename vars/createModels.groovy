@@ -8,6 +8,13 @@ import com.cloudbees.hudson.plugins.modeling.UIControl
 
 @Field Jenkins jenkins = Jenkins.get()
 
+def createAllModels() {
+    Map auxDefs = readYaml(text: libraryResource("aux-models.yaml") as String) as Map
+    auxDefs.models.each { moduleDef ->
+        createModel(moduleDef as Map)
+    }
+}
+
 def createModel(Map modelDef, String superType = null) {
     println "Creating model ${modelDef}, superType is: ${superType}"
     def auxModel = new AuxModel(jenkins, modelDef.name as String)
@@ -59,11 +66,4 @@ static UIControl createControl(Map controlDef) {
         control = new ChoiceControl(options, modes.get(controlDef.mode))
     }
     return control
-}
-
-def createAllModels() {
-    Map auxDefs = readYaml(text: libraryResource("aux-models.yaml") as String) as Map
-    auxDefs.models.each { module ->
-        createModel(module as Map)
-    }
 }
