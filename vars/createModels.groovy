@@ -36,7 +36,7 @@ def createModel(Map modelDef, String superType = null) {
     jenkins.save()
     jenkins.reload()
     if (modelDef?.models) {
-        println "Creating nexted models: ${modelDef.models}"
+        println "Creating nested models: ${modelDef.models}"
         modelDef.models.each { childModelDef ->
             createModel(childModelDef as Map, modelDef.name as String)
         }
