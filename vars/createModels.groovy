@@ -8,6 +8,7 @@ import com.cloudbees.hudson.plugins.modeling.UIControl
 
 @Field Jenkins jenkins = Jenkins.get()
 
+@SuppressWarnings('unused')
 def createAllModels() {
     Map auxDefs = readYaml(text: libraryResource("aux-models.yaml") as String) as Map
     auxDefs.models.each { moduleDef ->
