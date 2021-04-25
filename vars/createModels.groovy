@@ -27,10 +27,7 @@ def createModel(Map modelDef, String superType = null) {
             def options = controlDef.options.collect { Map option ->
                 new ChoiceControl.Option(option.display as String, option.value as String)
             }
-            control = new ChoiceControl(
-                    options,
-                    ChoiceControl.Mode.RADIO_BUTTON
-            )
+            control = new ChoiceControl(options, Eval("ChoiceControl.Mode.${controlDef.mode}") as ChoiceControl.Mode)
         }
         def attr = new Attribute(attrDef.name as String, attrDef.displayName as String, control)
         attributes << attr

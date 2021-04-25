@@ -14,7 +14,7 @@ models:
             displayName: Stage
             control:
               type: ChoiceControl
-              mode: RADIO_BUTTON
+              mode: DROPDOWN_LIST
               options:
                 - value: dev
                   display: Dev
